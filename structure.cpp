@@ -4,24 +4,42 @@
  */
 
 #include <iostream>
+#include "stru.h"
 using namespace std;
 
-struct studentRec{
-	struct studentName{
-		string firstName;
-		string lastName;
-	}name;
-	int age;
-	int id;
-	struct grades{
-		int programGrade;
-		int quizGrade;
-		int finalExam;
-		float gpa;
-	}grade;
-};
+int insertData(studentRec ptr[]);
+void displayAll(int length, struct studentRec *ptr);
+void displayOne(struct studentRec *ptr, int length);
+void menu(studentRec *stud);
 
-void insertData(studentRec ptr[], int i){
+int main() {
+	studentRec stud[10];
+	while(true){
+		menu(stud);
+	}
+
+}
+
+void menu(studentRec *stud){
+	int option,count;
+	cout<<"Menu\n1. Insert Data\n2. Display All Data\n3. Display specific student data\n4. Exit"<<endl;
+	cout<<"Enter the choice: ";
+	cin>>option;
+	switch(option){
+	case 1: count=insertData(stud);
+			break;
+	case 2: displayAll(count,stud);
+			break;
+	case 3: displayOne(stud,count);
+			break;
+	case 4: exit(0);
+			break;
+	default: cout<<"Enter the correct option"<<endl;
+	}
+}
+
+int insertData(studentRec ptr[]){
+	static int i=0;
 	cout<<"Enter the first name: ";
 	cin>>ptr[i].name.firstName;
 	cout<<"Enter the last name: ";
@@ -38,29 +56,17 @@ void insertData(studentRec ptr[], int i){
 	cin>>ptr[i].grade.quizGrade;
 	cout<<"Enter the gpa: ";
 	cin>>ptr[i].grade.gpa;
+	cout<<"Data Inserted successfully!"<<endl<<endl;
+	i++;
+	return i;
 }
+
 void displayAll(int length, struct studentRec *ptr){
-	for(int i=0;i<length;i++){
-		cout<<"-----------------------------------------------------------------"<<endl;
-		cout<<"First Name is :"<<ptr[i].name.firstName<<endl;
-		cout<<"Last Name is :"<<ptr[i].name.lastName<<endl;
-		cout<<"Age is :"<<ptr[i].age<<endl;
-		cout<<"Id is :"<<ptr[i].id<<endl;
-		cout<<"Program Grade is :"<<ptr[i].grade.programGrade<<endl;
-		cout<<"Final Exam is :"<<ptr[i].grade.finalExam<<endl;
-		cout<<"Quiz Grade is :"<<ptr[i].grade.quizGrade<<endl;
-		cout<<"GPA is :"<<ptr[i].grade.gpa<<endl;
-		cout<<"-----------------------------------------------------------------"<<endl;
-	}
-}
-void displayOne(struct studentRec *ptr, int length)
-{
-	int id;
-	cout<<"Enter the id of the Student";
-	cin>>id;
-	bool flag=false;
-	for(int i=0;i<length;i++){
-		if(ptr[i].id==id){
+	if(length==0)
+		cout<<"No records found"<<endl;
+	else{
+		cout<<"Student Records:"<<endl;
+		for(int i=0;i<length;i++){
 			cout<<"-----------------------------------------------------------------"<<endl;
 			cout<<"First Name is :"<<ptr[i].name.firstName<<endl;
 			cout<<"Last Name is :"<<ptr[i].name.lastName<<endl;
@@ -71,35 +77,43 @@ void displayOne(struct studentRec *ptr, int length)
 			cout<<"Quiz Grade is :"<<ptr[i].grade.quizGrade<<endl;
 			cout<<"GPA is :"<<ptr[i].grade.gpa<<endl;
 			cout<<"-----------------------------------------------------------------"<<endl;
-			flag=true;
-			break;
 		}
+		cout<<endl<<endl;
 	}
+}
+
+
+void displayOne(struct studentRec *ptr, int length)
+{
+	int id;
+	bool flag=false;
+	if(length==0){
+		cout<<"No records found"<<endl;
+	}else{
+		cout<<"Enter the id of the Student";
+		cin>>id;
+		cout<<"Student Record"<<endl;
+		for(int i=0;i<length;i++){
+			if(ptr[i].id==id){
+				cout<<"-----------------------------------------------------------------"<<endl;
+				cout<<"First Name is :"<<ptr[i].name.firstName<<endl;
+				cout<<"Last Name is :"<<ptr[i].name.lastName<<endl;
+				cout<<"Age is :"<<ptr[i].age<<endl;
+				cout<<"Id is :"<<ptr[i].id<<endl;
+				cout<<"Program Grade is :"<<ptr[i].grade.programGrade<<endl;
+				cout<<"Final Exam is :"<<ptr[i].grade.finalExam<<endl;
+				cout<<"Quiz Grade is :"<<ptr[i].grade.quizGrade<<endl;
+				cout<<"GPA is :"<<ptr[i].grade.gpa<<endl;
+				cout<<"-----------------------------------------------------------------"<<endl;
+				flag=true;
+				break;
+			}
+		}
+		cout<<endl<<endl;
+	}
+
 	if(flag==false){
 		cout<<"No student with id "<<id<<" exists"<<endl;
 	}
 }
-int main(int argc, char **argv) {
-	studentRec stud[10];
-	int option;
-	int i=0;
-	while(true){
-		cout<<"Menu\n1. Insert Data\n2. Display All Data\n3. Display specific student data\n4. Exit"<<endl;
-		cout<<"Enter the choice: ";
-		cin>>option;
-		switch(option){
-		case 1: insertData(stud,i);
-				i++;
-				break;
-		case 2: displayAll(i,stud);
-				break;
-		case 3: displayOne(stud,i);
-				break;
-		case 4: exit(0);
-				break;
-		default: cout<<"Enter the correct option"<<endl;
-		}
 
-	}
-
-}
