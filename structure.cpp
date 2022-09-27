@@ -4,7 +4,7 @@
  */
 
 #include <iostream>
-#include "stru.h"
+#include "stru.h" //Refer stru.h file to get structure definition
 using namespace std;
 
 int insertData(studentRec ptr[]);
