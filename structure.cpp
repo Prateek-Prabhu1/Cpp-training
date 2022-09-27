@@ -1,3 +1,8 @@
+/*This program stores the details of the student like name, age, id, grades.
+ * There are basically 3 functions in this, 1. Insert the data, 2. Retrieve All student data,
+ * 3. Retrieve specific student data.
+ */
+
 #include <iostream>
 using namespace std;
 
@@ -16,23 +21,23 @@ struct studentRec{
 	}grade;
 };
 
-void insertData(studentRec *ptr){
+void insertData(studentRec ptr[], int i){
 	cout<<"Enter the first name: ";
-	cin>>ptr->name.firstName;
+	cin>>ptr[i].name.firstName;
 	cout<<"Enter the last name: ";
-	cin>>ptr->name.lastName;
+	cin>>ptr[i].name.lastName;
 	cout<<"Enter the age: ";
-	cin>>ptr->age;
+	cin>>ptr[i].age;
 	cout<<"Enter the id: ";
-	cin>>ptr->id;
+	cin>>ptr[i].id;
 	cout<<"Enter the program grade: ";
-	cin>>ptr->grade.programGrade;
+	cin>>ptr[i].grade.programGrade;
 	cout<<"Enter the final exam grade: ";
-	cin>>ptr->grade.finalExam;
+	cin>>ptr[i].grade.finalExam;
 	cout<<"Enter the quiz grade: ";
-	cin>>ptr->grade.quizGrade;
+	cin>>ptr[i].grade.quizGrade;
 	cout<<"Enter the gpa: ";
-	cin>>ptr->grade.gpa;
+	cin>>ptr[i].grade.gpa;
 }
 void displayAll(int length, struct studentRec *ptr){
 	for(int i=0;i<length;i++){
@@ -83,7 +88,8 @@ int main(int argc, char **argv) {
 		cout<<"Enter the choice: ";
 		cin>>option;
 		switch(option){
-		case 1: insertData(stud);
+		case 1: insertData(stud,i);
+				i++;
 				break;
 		case 2: displayAll(i,stud);
 				break;
@@ -93,7 +99,7 @@ int main(int argc, char **argv) {
 				break;
 		default: cout<<"Enter the correct option"<<endl;
 		}
-		i++;
+
 	}
 
 }
