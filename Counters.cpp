@@ -27,6 +27,10 @@ int main(int argc, char **argv) {
 	static bool EowCheck=true;
 	FILE *fr;
 	fr=fopen("demo.txt","r");
+	if(fr==NULL){
+		cout<<"No file exists!";
+		exit(0);
+	}
 	c=fgetc(fr);
 	while(c!=EOF){
 		counters(c, n, EowCheck, EosCheck);
