@@ -47,7 +47,7 @@ Identifiers decode(char c){
 	else if(islower(c)){
 		return LOWER;
 	}
-	else if(isspace(c) || c=='\n'){
+	else if(isspace(c)){
 		return EOW;
 	}
 	else if(c=='.' || c=='?' || c=='!'){
