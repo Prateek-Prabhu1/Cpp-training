@@ -85,7 +85,6 @@ void counters(char c, number &n, bool &EowCheck, bool &EosCheck){
 						EosCheck=false;
 					}
 					EowCheck=true;
-
 					break;
 
 	}
